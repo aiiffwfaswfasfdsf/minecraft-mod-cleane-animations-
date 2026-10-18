@@ -1,0 +1,98 @@
+name: build
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  native:
+    name: native (${{ matrix.dir }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            dir: linux-x86_64
+            lib: libcleananimations_native.so
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            dir: windows-x86_64
+            lib: cleananimations_native.dll
+          - os: macos-14
+            target: aarch64-apple-darwin
+            dir: macos-aarch64
+            lib: libcleananimations_native.dylib
+          - os: macos-13
+            target: x86_64-apple-darwin
+            dir: macos-x86_64
+            lib: libcleananimations_native.dylib
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust target
+        run: rustup target add ${{ matrix.target }}
+      - name: Test
+        working-directory: native
+        run: cargo test --target ${{ matrix.target }}
+      - name: Build cdylib
+        working-directory: native
+        run: cargo build --release --target ${{ matrix.target }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: native-${{ matrix.dir }}
+          path: native/target/${{ matrix.target }}/release/${{ matrix.lib }}
+          if-no-files-found: error
+
+  mod:
+    name: build jar
+    needs: native
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # needed to publish the GitHub Release on v* tags
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: native-*
+          path: natives-download
+      - name: Place native libraries into resources
+        run: |
+          for d in natives-download/native-*; do
+            dir="${d#natives-download/native-}"
+            mkdir -p "src/client/resources/natives/$dir"
+            cp "$d"/* "src/client/resources/natives/$dir/"
+          done
+          find src/client/resources/natives -type f
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+      - name: Build
+        run: ./gradlew build
+      - name: Verify jar contents
+        run: |
+          jar=$(ls build/libs/cleananimations-*.jar | grep -v -e '-sources' -e '-dev' | head -n 1)
+          unzip -l "$jar" | grep natives/
+      - name: Collect jar
+        run: |
+          mkdir -p dist
+          for f in build/libs/cleananimations-*.jar; do
+            case "$f" in *-sources.jar|*-dev.jar) ;; *) cp "$f" dist/ ;; esac
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cleananimations-jar
+          path: dist/*.jar
+          if-no-files-found: error
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.jar
+          generate_release_notes: true

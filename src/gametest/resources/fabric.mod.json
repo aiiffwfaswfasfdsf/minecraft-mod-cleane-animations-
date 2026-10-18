@@ -1,0 +1,12 @@
+{
+	"schemaVersion": 1,
+	"id": "cleananimations-gametest",
+	"version": "1.0.0",
+	"name": "Clean Animations Game Tests",
+	"environment": "client",
+	"entrypoints": {
+		"fabric-client-gametest": [
+			"io.github.aiiffwfaswfasfdsf.cleananimations.gametest.SkeletonClientGameTest"
+		]
+	}
+}

@@ -1,0 +1,3 @@
+# Used only when cross-compiling the Windows DLL from Linux (needs gcc-mingw-w64-x86-64).
+[target.x86_64-pc-windows-gnu]
+linker = "x86_64-w64-mingw32-gcc"

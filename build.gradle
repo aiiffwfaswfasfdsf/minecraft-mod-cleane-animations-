@@ -1,0 +1,148 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+	id 'maven-publish'
+}
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	maven {
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/'
+		content {
+			includeGroup 'com.terraformersmc'
+		}
+	}
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"cleananimations" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	// Mod Menu is optional at runtime: compile-only, the entrypoint is only loaded when Mod Menu is present.
+	compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+
+	testImplementation sourceSets.client.output
+	testImplementation "com.google.code.gson:gson:2.11.0"
+	testImplementation "org.slf4j:slf4j-api:2.0.16"
+	testImplementation platform("org.junit:junit-bom:5.11.4")
+	testImplementation "org.junit.jupiter:junit-jupiter"
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+// fabric.mod.json lives in src/client/resources (client-only mod).
+def modVersion = project.version.toString()
+tasks.matching { it.name in ['processResources', 'processClientResources'] }.configureEach {
+	inputs.property "version", modVersion
+	filesMatching("fabric.mod.json") {
+		expand "version": modVersion
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
+	withSourcesJar()
+}
+
+def projectName = project.name
+jar {
+	inputs.property "projectName", projectName
+	from("LICENSE") {
+		rename { "${it}_${projectName}" }
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Native (Rust) animation math. Optional: without cargo the jar still builds
+// and the mod falls back to the equivalent pure-Java implementation.
+// ---------------------------------------------------------------------------
+def hostOs = System.getProperty('os.name').toLowerCase()
+def hostArch = System.getProperty('os.arch').toLowerCase()
+def osName = hostOs.contains('win') ? 'windows' : (hostOs.contains('mac') ? 'macos' : 'linux')
+def archName = (hostArch == 'aarch64' || hostArch == 'arm64') ? 'aarch64' : 'x86_64'
+def libFile = osName == 'windows' ? 'cleananimations_native.dll'
+		: (osName == 'macos' ? 'libcleananimations_native.dylib' : 'libcleananimations_native.so')
+def nativeOutDir = layout.projectDirectory.dir("src/client/resources/natives/${osName}-${archName}")
+
+tasks.register('buildNative') {
+	group = 'build'
+	description = 'Builds the Rust native animation math for the host platform (skipped if cargo is missing).'
+	def nativeDir = layout.projectDirectory.dir('native')
+	inputs.files(fileTree(nativeDir) { include 'Cargo.toml', 'src/**' })
+	outputs.dir(nativeOutDir)
+	doLast {
+		try {
+			def proc = new ProcessBuilder('cargo', 'build', '--release')
+					.directory(nativeDir.asFile).redirectErrorStream(true).start()
+			def out = proc.inputStream.text
+			if (proc.waitFor() != 0) {
+				logger.warn("cargo build failed, continuing without native library:\n" + out)
+				return
+			}
+			def built = nativeDir.file("target/release/${libFile}").asFile
+			if (!built.exists()) {
+				logger.warn("cargo succeeded but ${built} is missing; continuing without native library")
+				return
+			}
+			def dest = nativeOutDir.asFile
+			dest.mkdirs()
+			java.nio.file.Files.copy(built.toPath(), new File(dest, libFile).toPath(),
+					java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+		} catch (IOException e) {
+			logger.lifecycle("cargo not found; skipping native build (Java fallback will be used): ${e.message}")
+		}
+	}
+}
+
+tasks.matching { it.name in ['processResources', 'processClientResources', 'sourcesJar'] }.configureEach {
+	dependsOn 'buildNative'
+}
+
+tasks.withType(Test).configureEach {
+	useJUnitPlatform()
+	// Tests that need the real library look for it here (see NativeParityTest).
+	systemProperty 'cleananimations.nativeLib',
+			layout.projectDirectory.file("native/target/release/${libFile}").asFile.absolutePath
+	jvmArgs '--enable-native-access=ALL-UNNAMED'
+}
+
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			from components.java
+		}
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Client game tests (Fabric API). Run: xvfb-run -a ./gradlew runClientGameTest
+// ---------------------------------------------------------------------------
+fabricApi {
+	configureTests {
+		createSourceSet = true
+		modId = "cleananimations-gametest"
+		enableGameTests = false // no server-side game tests yet
+		enableClientGameTests = true
+		eula = true // By setting this to true, you agree to the Minecraft EULA.
+	}
+}

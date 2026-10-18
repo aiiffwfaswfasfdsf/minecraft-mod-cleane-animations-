@@ -1,0 +1,19 @@
+{
+	"key.category.cleananimations.main": "Clean Animations",
+	"key.cleananimations.open_config": "Open Config",
+
+	"cleananimations.config.title": "Clean Animations",
+	"cleananimations.config.empty": "No options in this section yet.",
+
+	"cleananimations.config.section.core": "General",
+	"cleananimations.config.section.swing": "Swing",
+	"cleananimations.config.section.placement": "Placement",
+	"cleananimations.config.section.hud": "HUD",
+
+	"cleananimations.config.core.enabled": "Enabled",
+	"cleananimations.config.core.enabled.tooltip": "Master switch for every animation of this mod.",
+	"cleananimations.config.core.animationSpeed": "Animation Speed",
+	"cleananimations.config.core.animationSpeed.tooltip": "Global speed multiplier for all animations.",
+	"cleananimations.config.core.intensity": "Intensity",
+	"cleananimations.config.core.intensity.tooltip": "How strong the animation motion is. 0 disables motion."
+}

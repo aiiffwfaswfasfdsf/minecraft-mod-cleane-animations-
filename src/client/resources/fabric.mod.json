@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "cleananimations",
+	"version": "${version}",
+	"name": "Clean Animations",
+	"description": "Smooth, configurable client-side animations: sword swings, block placement and HUD polish.",
+	"authors": [
+		"aiiffwfaswfasfdsf"
+	],
+	"contact": {
+		"sources": "https://github.com/aiiffwfaswfasfdsf/minecraft-mod-cleane-animations-"
+	},
+	"license": "EPL-2.0",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"io.github.aiiffwfaswfasfdsf.cleananimations.core.CleanAnimationsClient"
+		],
+		"modmenu": [
+			"io.github.aiiffwfaswfasfdsf.cleananimations.core.compat.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		{ "config": "cleananimations.core.mixins.json", "environment": "client" },
+		{ "config": "cleananimations.swing.mixins.json", "environment": "client" },
+		{ "config": "cleananimations.placement.mixins.json", "environment": "client" },
+		{ "config": "cleananimations.hud.mixins.json", "environment": "client" }
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

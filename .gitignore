@@ -1,0 +1,12 @@
+build/
+.gradle/
+run/
+native/target/
+*.iml
+.idea/
+out/
+.vscode/
+*.log
+# Native libraries are built locally / by CI, never committed
+src/client/resources/natives/
+logs/

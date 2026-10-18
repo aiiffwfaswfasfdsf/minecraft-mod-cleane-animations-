@@ -1,0 +1,16 @@
+[package]
+name = "cleananimations_native"
+version = "0.1.0"
+edition = "2021"
+license = "EPL-2.0"
+description = "Animation math core for the Clean Animations Minecraft mod"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
+panic = "abort"
