@@ -8,7 +8,8 @@
 		"fabric-client-gametest": [
 			"io.github.aiiffwfaswfasfdsf.cleananimations.gametest.SkeletonClientGameTest",
 			"io.github.aiiffwfaswfasfdsf.cleananimations.gametest.SwingClientGameTest",
-			"io.github.aiiffwfaswfasfdsf.cleananimations.gametest.PlacementClientGameTest"
+			"io.github.aiiffwfaswfasfdsf.cleananimations.gametest.PlacementClientGameTest",
+			"io.github.aiiffwfaswfasfdsf.cleananimations.gametest.HudClientGameTest"
 		]
 	}
 }
