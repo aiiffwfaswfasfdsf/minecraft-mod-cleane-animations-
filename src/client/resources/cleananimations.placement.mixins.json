@@ -3,7 +3,14 @@
 	"minVersion": "0.8",
 	"package": "io.github.aiiffwfaswfasfdsf.cleananimations.placement.mixin",
 	"compatibilityLevel": "JAVA_25",
-	"client": [],
+	"plugin": "io.github.aiiffwfaswfasfdsf.cleananimations.placement.PlacementMixinPlugin",
+	"client": [
+		"ClientLevelMixin",
+		"MinecraftAccessor",
+		"MinecraftMixin",
+		"RenderSectionRegionMixin",
+		"SodiumLevelSliceMixin"
+	],
 	"injectors": {
 		"defaultRequire": 1
 	}

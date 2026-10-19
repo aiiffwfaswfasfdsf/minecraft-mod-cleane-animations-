@@ -8,6 +8,18 @@ base {
 }
 
 repositories {
+	// Only used for the optional Sodium test run (-Psodium=<version>), never for the shipped jar.
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = 'Modrinth'
+				url = 'https://api.modrinth.com/maven'
+			}
+		}
+		filter {
+			includeGroup 'maven.modrinth'
+		}
+	}
 	maven {
 		name = 'TerraformersMC'
 		url = 'https://maven.terraformersmc.com/'
@@ -35,6 +47,12 @@ dependencies {
 
 	// Mod Menu is optional at runtime: compile-only, the entrypoint is only loaded when Mod Menu is present.
 	compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+
+	// Optional: ./gradlew runClientGameTest -Psodium=mc26.3-0.9.2-fabric runs the game tests with Sodium installed.
+	// localRuntime keeps it off the published artifacts: the mod never depends on Sodium.
+	if (project.hasProperty('sodium')) {
+		localRuntime "maven.modrinth:sodium:${project.property('sodium')}"
+	}
 
 	testImplementation sourceSets.client.output
 	testImplementation "com.google.code.gson:gson:2.11.0"
