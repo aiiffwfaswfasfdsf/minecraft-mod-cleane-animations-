@@ -3,7 +3,10 @@
 	"minVersion": "0.8",
 	"package": "io.github.aiiffwfaswfasfdsf.cleananimations.swing.mixin",
 	"compatibilityLevel": "JAVA_25",
-	"client": [],
+	"client": [
+		"FirstPersonHandsAndItemsRendererMixin",
+		"SpearAnimationsMixin"
+	],
 	"injectors": {
 		"defaultRequire": 1
 	}

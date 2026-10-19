@@ -1,0 +1,141 @@
+{
+	"duration": 14,
+	"channels": {
+		"posX": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.4,
+				"v": -0.04,
+				"ease": "in_out_sine"
+			},
+			{
+				"t": 0.62,
+				"v": -0.08,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"posY": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.42,
+				"v": 0.32,
+				"ease": "in_out_sine"
+			},
+			{
+				"t": 0.6,
+				"v": -0.16,
+				"ease": "in_quint"
+			},
+			{
+				"t": 0.72,
+				"v": -0.1,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"posZ": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.42,
+				"v": 0.12,
+				"ease": "in_out_sine"
+			},
+			{
+				"t": 0.6,
+				"v": -0.2,
+				"ease": "in_quint"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"rotX": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.42,
+				"v": -28,
+				"ease": "in_out_sine"
+			},
+			{
+				"t": 0.6,
+				"v": -105,
+				"ease": "in_quint"
+			},
+			{
+				"t": 0.72,
+				"v": -92,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"rotZ": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.42,
+				"v": 10,
+				"ease": "in_out_sine"
+			},
+			{
+				"t": 0.6,
+				"v": -4,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"lean": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.6,
+				"v": 2,
+				"ease": "in_out_sine"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		]
+	},
+	"shake": {
+		"at": 0.6,
+		"amplitude": 0.03,
+		"ticks": 4
+	}
+}

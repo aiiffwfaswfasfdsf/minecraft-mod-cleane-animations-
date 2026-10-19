@@ -6,7 +6,8 @@
 	"environment": "client",
 	"entrypoints": {
 		"fabric-client-gametest": [
-			"io.github.aiiffwfaswfasfdsf.cleananimations.gametest.SkeletonClientGameTest"
+			"io.github.aiiffwfaswfasfdsf.cleananimations.gametest.SkeletonClientGameTest",
+			"io.github.aiiffwfaswfasfdsf.cleananimations.gametest.SwingClientGameTest"
 		]
 	}
 }
