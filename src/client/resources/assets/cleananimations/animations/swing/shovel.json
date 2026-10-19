@@ -1,0 +1,199 @@
+{
+	"duration": 9,
+	"channels": {
+		"posX": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.3,
+				"v": 0.03,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 0.6,
+				"v": -0.06,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"posY": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.3,
+				"v": -0.14,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 0.62,
+				"v": 0.1,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"posZ": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.3,
+				"v": 0.16,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 0.62,
+				"v": -0.26,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"rotX": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.3,
+				"v": 18,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 0.62,
+				"v": -70,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"rotY": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.3,
+				"v": -10,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 0.62,
+				"v": 8,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"rotZ": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.3,
+				"v": -8,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 0.62,
+				"v": 12,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		]
+	},
+	"mining": {
+		"duration": 10,
+		"channels": {
+			"posY": [
+				{
+					"t": 0,
+					"v": 0
+				},
+				{
+					"t": 0.35,
+					"v": -0.1,
+					"ease": "out_cubic"
+				},
+				{
+					"t": 0.65,
+					"v": 0.05,
+					"ease": "out_cubic"
+				},
+				{
+					"t": 1,
+					"v": 0,
+					"ease": "in_out_sine"
+				}
+			],
+			"posZ": [
+				{
+					"t": 0,
+					"v": 0
+				},
+				{
+					"t": 0.35,
+					"v": 0.1,
+					"ease": "out_cubic"
+				},
+				{
+					"t": 0.65,
+					"v": -0.2,
+					"ease": "out_cubic"
+				},
+				{
+					"t": 1,
+					"v": 0,
+					"ease": "in_out_sine"
+				}
+			],
+			"rotX": [
+				{
+					"t": 0,
+					"v": 0
+				},
+				{
+					"t": 0.35,
+					"v": 14,
+					"ease": "out_cubic"
+				},
+				{
+					"t": 0.65,
+					"v": -55,
+					"ease": "out_cubic"
+				},
+				{
+					"t": 1,
+					"v": 0,
+					"ease": "in_out_sine"
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,115 @@
+{
+	"duration": 7,
+	"channels": {
+		"posY": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.3,
+				"v": -0.02,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 0.45,
+				"v": 0.0,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"posZ": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.3,
+				"v": 0.22,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 0.5,
+				"v": -0.4,
+				"ease": "out_quint"
+			},
+			{
+				"t": 0.7,
+				"v": -0.3,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"posX": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.3,
+				"v": 0.04,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 0.5,
+				"v": -0.06,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"rotX": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.3,
+				"v": 12,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 0.5,
+				"v": -14,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		],
+		"rotY": [
+			{
+				"t": 0,
+				"v": 0
+			},
+			{
+				"t": 0.3,
+				"v": 6,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 0.5,
+				"v": -6,
+				"ease": "out_cubic"
+			},
+			{
+				"t": 1,
+				"v": 0,
+				"ease": "in_out_sine"
+			}
+		]
+	}
+}

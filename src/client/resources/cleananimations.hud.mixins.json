@@ -1,0 +1,16 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "io.github.aiiffwfaswfasfdsf.cleananimations.hud.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"CameraMixin",
+		"GameRendererMixin",
+		"HudElementsMixin",
+		"MouseHandlerMixin",
+		"ScreenMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
